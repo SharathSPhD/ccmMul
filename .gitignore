@@ -3,6 +3,9 @@
 data/
 *.pkl
 results/
+plots/
+test_plots/
+test_results/
 plotting/
 __pycache__/
 *.py[cod]

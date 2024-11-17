@@ -20,6 +20,7 @@ def plot_ccm_results(results, target, config, save_dir, data=None):
     data : pandas.DataFrame, optional
         Original data with datetime column if available
     """
+    os.makedirs(save_dir, exist_ok=True)
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10))
     
     # Plot 1: Bar plot of correlations
@@ -110,6 +111,7 @@ def plot_data_overview(data, config, save_dir):
     save_dir : str
         Directory to save plots
     """
+    os.makedirs(save_dir, exist_ok=True)
     columns = config['data']['columns_to_keep']
     datetime_col = config['data'].get('datetime_column')
     

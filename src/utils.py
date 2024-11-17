@@ -21,7 +21,7 @@ def generate_synthetic_data(params):
     z = 0.3 * x + 0.5 * y + np.random.normal(0, noise_level, n_points)
     
     # Create DataFrame with datetime index
-    dates = pd.date_range(start='2023-01-01', periods=n_points, freq='H')
+    dates = pd.date_range(start='2023-01-01', periods=n_points, freq='h')
     data = pd.DataFrame({
         'datetime': dates,
         'x': x,
