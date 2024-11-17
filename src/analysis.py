@@ -4,6 +4,12 @@ from .plotting import plot_ccm_results
 def run_ccm_analysis(data, config, timestamp=None):
     """Run CCM analysis for all variables."""
     from .utils import save_results
+    from .plotting import plot_data_overview, plot_ccm_results
+    
+    # First plot overview of all time series
+    print("\nCreating data overview plot...")
+    overview_file = plot_data_overview(data, config, config['output']['plots_dir'])
+    print(f"Data overview saved as {overview_file}")
     
     results = {}
     columns = config['data']['columns_to_keep']
@@ -21,9 +27,11 @@ def run_ccm_analysis(data, config, timestamp=None):
         # Run analysis
         target_results = mccm.analyze()
         
-        # Create plots
+        # Create plots with datetime if available
         plot_file = plot_ccm_results(
-            target_results, target, config, config['output']['plots_dir']
+            target_results, target, config, 
+            config['output']['plots_dir'], 
+            data=data  # Pass the original data for datetime plotting
         )
         print(f"Plots saved as {plot_file}")
         
