@@ -1,0 +1,25 @@
+{
+    "data": {
+        "type": "synthetic",
+        "file_path": "data/sample_data.csv",
+        "datetime_column": "datetime",
+        "columns_to_keep": ["x", "y", "z"],
+        "synthetic_params": {
+            "n_points": 1000,
+            "noise_level": 0.1
+        }
+    },
+    "analysis": {
+        "embedding_dimension": 3,
+        "tau": -1,
+        "train_size_ratio": 0.75,
+        "num_surrogates": 100,
+        "exclusion_radius": 0
+    },
+    "output": {
+        "plots_dir": "plots",
+        "results_dir": "results",
+        "save_predictions": true,
+        "filename_prefix": "ccm_analysis"
+    }
+}
