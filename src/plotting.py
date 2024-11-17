@@ -1,9 +1,15 @@
-import matplotlib.pyplot as plt
-import numpy as np
-import os
-import pandas as pd
+# src/plotting.py
+"""Plotting functions for CCM analysis."""
 
-def plot_ccm_results(results, target, config, save_dir, data=None):
+import os
+from typing import Dict, Any, Optional
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+
+def plot_ccm_results(results: Dict[str, Any], target: str, 
+                    config: Dict[str, Any], save_dir: str, 
+                    data: Optional[pd.DataFrame] = None) -> str:
     """
     Plot and save CCM analysis results.
     
@@ -98,7 +104,8 @@ def plot_ccm_results(results, target, config, save_dir, data=None):
     
     return filename
 
-def plot_data_overview(data, config, save_dir):
+def plot_data_overview(data: pd.DataFrame, config: Dict[str, Any], 
+                      save_dir: str) -> str:
     """
     Plot overview of input time series data.
     

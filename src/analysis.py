@@ -1,12 +1,23 @@
-from .multivariate_ccm import MultivariateCCM
-from .plotting import plot_ccm_results
+# src/analysis.py
+"""Analysis module for CCM calculations."""
 
-def run_ccm_analysis(data, config, timestamp=None):
+import os
+from typing import Dict, Any
+import pandas as pd
+
+from .multivariate_ccm import MultivariateCCM
+from .plotting import plot_ccm_results, plot_data_overview
+from .utils import save_results
+
+def run_ccm_analysis(data: 'pd.DataFrame', config: Dict[str, Any], 
+                    timestamp: str = None) -> Dict[str, Any]:
     """Run CCM analysis for all variables."""
-    from .utils import save_results
-    from .plotting import plot_data_overview, plot_ccm_results
+    print("Multivariate CCM Analysis")
+    print("========================")
     
-    # First plot overview of all time series
+    os.makedirs(config['output']['plots_dir'], exist_ok=True)
+    os.makedirs(config['output']['results_dir'], exist_ok=True)
+    
     print("\nCreating data overview plot...")
     overview_file = plot_data_overview(data, config, config['output']['plots_dir'])
     print(f"Data overview saved as {overview_file}")
@@ -16,28 +27,23 @@ def run_ccm_analysis(data, config, timestamp=None):
     
     for target in columns:
         print(f"\nAnalyzing {target} as target variable...")
-        
         mccm = MultivariateCCM(
             data=data,
             columns=columns,
             target=target,
             config=config['analysis']
         )
-        
-        # Run analysis
         target_results = mccm.analyze()
-        
-        # Create plots with datetime if available
         plot_file = plot_ccm_results(
-            target_results, target, config, 
+            target_results, 
+            target, 
+            config, 
             config['output']['plots_dir'], 
-            data=data  # Pass the original data for datetime plotting
+            data=data
         )
         print(f"Plots saved as {plot_file}")
-        
         results[target] = target_results
     
-    # Save numerical results
     saved_files = save_results(results, config, timestamp)
     print("\nSaved results files:")
     for file_type, filename in saved_files.items():
@@ -46,7 +52,7 @@ def run_ccm_analysis(data, config, timestamp=None):
     
     return results
 
-def print_summary(results):
+def print_summary(results: Dict[str, Any]) -> None:
     """Print summary of all analyses."""
     print("\nAnalysis Summary:")
     print("================")

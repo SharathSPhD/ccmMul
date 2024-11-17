@@ -1,9 +1,12 @@
+# src/utils.py
+"""Utility functions for CCM analysis."""
 import json
 import pandas as pd
 import numpy as np
 import os
+from typing import Dict, Any, Optional
 
-def load_config(config_path='config/config.json'):
+def load_config(config_path: str = 'config/config.json') -> Dict[str, Any]:
     """Load configuration from JSON file."""
     with open(config_path, 'r') as f:
         config = json.load(f)
@@ -31,7 +34,7 @@ def generate_synthetic_data(params):
     
     return data
 
-def load_data(config):
+def load_data(config: Dict[str, Any]) -> pd.DataFrame:
     """Load data based on configuration."""
     if config['data']['type'] == 'synthetic':
         data = generate_synthetic_data(config['data']['synthetic_params'])
@@ -57,7 +60,8 @@ def load_data(config):
     
     return data
 
-def save_results(results, config, timestamp=None):
+def save_results(results: Dict[str, Any], config: Dict[str, Any], 
+                timestamp: Optional[str] = None) -> Dict[str, str]:
     """
     Save analysis results to CSV files.
     
