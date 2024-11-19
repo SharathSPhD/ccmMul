@@ -33,6 +33,7 @@ ENV/
 
 # Project specific files
 *.csv
+*.log
 data/
 *.pkl
 results/
@@ -40,3 +41,5 @@ plots/
 test_plots/
 test_results/
 plotting/
+log/
+test_*/

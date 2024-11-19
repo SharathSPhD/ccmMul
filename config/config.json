@@ -14,11 +14,22 @@
         "tau": -1,
         "train_size_ratio": 0.75,
         "num_surrogates": 100,
-        "exclusion_radius": 0
+        "exclusion_radius": 0,
+        "parallel": {
+            "enabled": true,
+            "max_workers": null, 
+            "chunk_size": 1
+        },
+        "combinations": {
+            "max_predictors": 5,
+            "max_combinations": 10000,
+            "correlation_threshold": 0.7
+        }
     },
     "output": {
         "plots_dir": "plots",
         "results_dir": "results",
+        "logs_dir": "logs",
         "save_predictions": true,
         "filename_prefix": "ccm_analysis"
     }
