@@ -134,7 +134,7 @@ If you use this code in your research, please cite:
 
 ```
 @software{ccmMul2024,
-  author = {Your Name},
+  author = Sharath S,
   title = {Multivariate CCM Analysis},
   year = {2024},
   publisher = {GitHub},
